@@ -2,7 +2,10 @@ import streamlit as st
 import requests
 import time
 import base64
+import os
 import streamlit.components.v1 as components
+
+BACKEND_URL = os.getenv("BACKEND_URL", "http://127.0.0.1:8000")
 
 st.set_page_config(page_title="AdAgent Optimizer", layout="wide")
 
@@ -38,7 +41,7 @@ if submit and has_ad and lp_url:
                 payload["ad_image_base64"] = ad_image_b64
 
             response = requests.post(
-                "http://127.0.0.1:8000/personalize", json=payload, timeout=300
+                f"{BACKEND_URL}/personalize", json=payload, timeout=300
             )
             response.raise_for_status()
             data = response.json()
