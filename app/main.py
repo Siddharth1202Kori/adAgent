@@ -24,6 +24,10 @@ class PersonalizeRequest(BaseModel):
     lp_url: str
     ad_image_base64: Optional[str] = None
 
+@app.get("/")
+async def root_health_check():
+    return {"status": "AdAgent Backend is running and healthy", "version": "1.0"}
+
 @app.post("/personalize")
 async def personalize(request: PersonalizeRequest):
     try:
